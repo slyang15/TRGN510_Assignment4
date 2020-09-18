@@ -3,7 +3,6 @@
 import sys
 import fileinput
 import re
-import csv
 
 ensg2hugo = {}
 for each_line_of_text in fileinput.input("./Homo_sapiens.GRCh37.75.gtf"):
@@ -15,7 +14,19 @@ for each_line_of_text in fileinput.input("./Homo_sapiens.GRCh37.75.gtf"):
             if hugoName:
                 ensg2hugo[geneID[0]]= hugoName[0]
                # print(ensg2hugo)
-for line in fileinput.input("./expres.anal.csv"):
+
+gtf_file = ""
+if (len(sys.argv)>2):
+    if sys.argv[1][:2] == "-f":
+        colNumber = int(sys.argv[1][2]) -1
+        gtf_file = sys.argv[2]
+else:
+    column = 1
+    gtf_file = sys.argv[1]
+
+
+
+for line in fileinput.input(gtf_file):
     splitcolumn = re.split('\,', line)
     ensembl = re.findall(r'ENSG+[0-9]{11}', line, re.I)
     if ensembl:
