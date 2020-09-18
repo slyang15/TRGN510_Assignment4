@@ -13,7 +13,7 @@ for each_line_of_text in fileinput.input("./Homo_sapiens.GRCh37.75.gtf"):
         if geneID:
             if hugoName:
                 ensg2hugo[geneID[0]]= hugoName[0]
-               # print(ensg2hugo)
+            
 
 gtf_file = ""
 if (len(sys.argv)>2):
